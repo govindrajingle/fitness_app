@@ -1,7 +1,6 @@
 spring:
   application:
     name: userservice
-
   datasource:
     url: jdbc:postgresql://10.10.11.74:5444/stqc
     username: stqc
@@ -14,3 +13,11 @@ spring:
     properties:
       hibernate:
         default_schema: fitness
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8081

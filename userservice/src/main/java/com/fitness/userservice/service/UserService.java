@@ -14,19 +14,24 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserResponse register(RegisterRequest request) {
-
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
-
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-
         User savedUser = userRepository.save(user);
+        return convertToUserResponse(savedUser);
+    }
 
+    public UserResponse getUserProfile(String userId) {
+        User savedUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not Found"));
+        return convertToUserResponse(savedUser);
+    }
+
+    public UserResponse convertToUserResponse(User savedUser) {
         UserResponse response = new UserResponse();
         response.setId(savedUser.getId());
         response.setEmail(savedUser.getEmail());
@@ -34,7 +39,6 @@ public class UserService {
         response.setLastName(savedUser.getLastName());
         response.setCreatedAt(savedUser.getCreatedAt());
         response.setUpdatedAt(savedUser.getUpdatedAt());
-
         return response;
     }
 }

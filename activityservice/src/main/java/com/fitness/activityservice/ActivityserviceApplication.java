@@ -1,4 +1,4 @@
-package com.fitness.userservice;
+package com.fitness.activityservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,11 +8,11 @@ import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class UserserviceApplication {
+public class ActivityserviceApplication {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
-        SpringApplication.run(UserserviceApplication.class, args);
-    }
+        SpringApplication.run(ActivityserviceApplication.class, args);
+	}
 
 }
