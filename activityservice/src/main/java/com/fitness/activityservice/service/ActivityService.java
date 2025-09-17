@@ -12,8 +12,13 @@ import org.springframework.stereotype.Service;
 public class ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final UserValidationService userValidationService;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
+        Boolean isValidUser = userValidationService.validateUser(request.getUserId());
+        if (!isValidUser) {
+            throw new RuntimeException("Invalid User Id : " + request.getUserId());
+        }
         Activity activity = Activity.builder().userId(request.getUserId()).type(request.getType()).duration(request.getDuration()).caloriesBurned(request.getCaloriesBurned()).startTime(request.getStartTime()).additionalMetrics(request.getAdditionalMetrics()).build();
         Activity savedActivity = activityRepository.save(activity);
         return mapToResponse(savedActivity);

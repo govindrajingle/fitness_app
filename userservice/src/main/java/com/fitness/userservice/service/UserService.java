@@ -31,6 +31,10 @@ public class UserService {
         return convertToUserResponse(savedUser);
     }
 
+    public Boolean existsById(String userId) {
+        return userRepository.existsById(userId);
+    }
+
     public UserResponse convertToUserResponse(User savedUser) {
         UserResponse response = new UserResponse();
         response.setId(savedUser.getId());
@@ -41,4 +45,5 @@ public class UserService {
         response.setUpdatedAt(savedUser.getUpdatedAt());
         return response;
     }
+
 }

@@ -2,9 +2,12 @@ spring:
   application:
     name: userservice
   datasource:
-    url: jdbc:postgresql://10.10.11.74:5444/stqc
-    username: stqc
-    password: stqc
+    url: jdbc:postgresql://localhost:5432/stqc
+    username: postgres
+    password: root
+#    url: jdbc:postgresql://10.10.11.74:5444/stqc
+#    username: stqc
+#    password: stqc
 
   jpa:
     hibernate:
