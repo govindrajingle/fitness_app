@@ -7,11 +7,14 @@ spring:
       database: airecommendationfitness
   kafka:
     bootstrap-servers: localhost:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: activity-processor-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Use JsonDeserializer for values (so bytes -> com.fitness.aiservice.model.Activity)
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.use.type.headers: false
+        # fully qualified class the deserializer should map the JSON to
         spring.json.value.default.type: com.fitness.aiservice.model.Activity
         spring.json.trusted.packages: "*"
 
@@ -23,7 +26,12 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+# separate, non-spring kafka app settings
 kafka:
   topic:
     name: activity-events
 
+gemini:
+  api:
+    url: ${GEMINI_URL}
+    key: ${GEMINI_KEY}
