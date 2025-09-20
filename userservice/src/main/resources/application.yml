@@ -1,29 +1,6 @@
 spring:
   application:
-    name: userservice
-  datasource:
-    url: jdbc:postgresql://localhost:5432/stqc
-    username: postgres
-    password: root
-#    url: jdbc:postgresql://10.10.11.74:5444/stqc
-#    username: stqc
-#    password: stqc
+    name: user-service
+  config:
+    import: optional:configserver:http://localhost:8888
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    properties:
-      hibernate:
-        default_schema: fitness
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-  instance:
-    prefer-ip-address: true
-
-server:
-  port: 8081
