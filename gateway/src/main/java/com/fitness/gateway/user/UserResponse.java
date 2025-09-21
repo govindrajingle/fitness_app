@@ -1,4 +1,4 @@
-package com.fitness.userservice.dto;
+package com.fitness.gateway.user;
 
 import lombok.Data;
 
@@ -13,5 +13,4 @@ public class UserResponse {
     private String lastName;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String keycloakId;
 }
