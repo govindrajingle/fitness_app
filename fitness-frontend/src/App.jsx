@@ -1,9 +1,20 @@
-import {BrowserRouter as Router,} from "react-router";
+import {BrowserRouter as Router, Route, Routes,} from "react-router";
 import Button from "@mui/material/Button";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "react-oauth2-code-pkce";
 import {useDispatch} from "react-redux";
-import {setCredentials} from "./store/authSlice.js"; // if using MUI
+import {logout, setCredentials} from "./store/authSlice.js";
+import {Box} from "@mui/material";
+import ActivityForm from "./components/ActivityForm.jsx";
+import ActivityList from "./components/ActivityList.jsx";
+import ActivityDetail from "./components/ActivityDetail.jsx"; // if using MUI
+
+const ActivityPage = () => {
+    return (<Box sx={{flexGrow: 1}}>
+        <ActivityForm onActivitiesAdded={() => window.location.reload()}/>
+        <ActivityList/>
+    </Box>)
+}
 
 function App() {
     const {token, tokenData, logIn} = useContext(AuthContext);
@@ -23,7 +34,15 @@ function App() {
                 LOGIN
             </Button>) : (<div>
                         <pre>
-                            {JSON.stringify(tokenData, null, 2)}
+                            <Box component="section" sx={{p: 2, border: '1px dashed grey'}}>
+                                <Button variant="contained" onClick={logout}>
+                                    LOGOUT
+                                </Button>
+                                <Routes>
+                                    <Route path="/activities" element={<ActivityPage/>}/>
+                                    <Route path="/activities/:id" element={<ActivityDetail/>}/>
+                                </Routes>
+                            </Box>
                         </pre>
             </div>)}
         </Router>
