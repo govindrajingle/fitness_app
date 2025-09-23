@@ -1,3 +1,7 @@
+# Fitness App Architecture
+
+![Fitness App Architecture](./fitness-app.png)
+
 Project Overview
 --------------------------------------------------------------
 
